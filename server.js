@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
 var uaParser = require("ua-parser-js");
-var os = require("os");
+
 var useragent = require("useragent");
 
 var app = express();
