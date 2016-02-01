@@ -5,8 +5,28 @@ var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
+var uaParser = require("ua-parser-js");
+var os = require("os");
+var useragent = require("useragent");
 
 var app = express();
+
+var obj = {
+	"ip-address": "",
+	"language": "",
+	"OS": ""
+};
+
+app.get('/info', function(req, res){
+	var agent = useragent.parse(req.headers['user-agent']);
+	
+	obj['ip-address'] = uaParser(req.headers)['ua']["x-forwarded-for"];
+	obj['language'] = uaParser(req.headers)['ua']['accept-language'];
+	obj['OS'] = agent.os.toString();
+	
+	res.send(JSON.stringify(obj));
+});
+
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
