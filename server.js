@@ -6,11 +6,11 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
 var uaParser = require("ua-parser-js");
-
+var favicon = require("serve-favicon");
 var useragent = require("useragent");
 
 var app = express();
-
+app.use(favicon(__dirname + '/favicon.ico'));
 var obj = {
 	"ip-address": "",
 	"language": "",
